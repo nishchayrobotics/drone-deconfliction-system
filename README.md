@@ -6,23 +6,23 @@ A 4D UAV Strategic Deconfliction System built using Python and AI tools for the 
 
 ## 📑 Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
+* [About the Project](#About-the-Project)
+  * [Built With](#Built-with)
   * [Code Quality & Architecture](#code-quality--architecture)
   * [Testing & Quality Assurance](#testing--quality-assurance)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
+* [Getting Started](#Getting-Started)
+  * [Prerequisites](#Prerequisites)
+  * [Installation](#Installation)
+* [Usage](#Usage)
 * [Contributors](#contributors)
 
 ---
 
-## 🚀 About the Project
+## About the Project
 
 This project implements a strategic deconfliction system that acts as the final authority for verifying whether a drone's waypoint mission is safe to execute in shared airspace.
 
-### 🛠️ Built With
+### Built With
 
 * Python
 * Matplotlib
@@ -30,9 +30,9 @@ This project implements a strategic deconfliction system that acts as the final 
 
 ---
 
-## 🧱 Code Quality & Architecture
+## Code Quality & Architecture
 
-### 🧩 Modularity & Structure
+### Modularity & Structure
 
 ```tree
 C:.
@@ -42,10 +42,13 @@ C:.
 │  
 ├───core
 │   │   conflict_checker.py
+│
 ├───data_class
 │   │   mission_data_class.py
+│
 ├───test
 │   │   generated_data.py
+│
 ├───visualizer
 │   │   visualizer.py
 │   │   visualizer_4d.py
@@ -68,28 +71,28 @@ graph TD
     A --> H(requirements.txt)
 ```
 
-### 📏 Coding Standards
+### Coding Standards
 
 * **Style Guide:** [PEP8](https://peps.python.org/pep-0008/)
 * **DocStrings:** [Best Practices](https://www.datacamp.com/tutorial/docstrings-python)
 * **Type Hints:** [PEP484](https://peps.python.org/pep-0484/)
 
-### 🧠 Architectural Decisions
+### Architectural Decisions
 
 * Used function-based modular design for isolated subsystems
 * Components can be replaced or reused in scaled cloud deployments
 * `check_conflicts()` function is decoupled from visuals/UI, enabling plug-and-play in APIs or embedded systems
 
-### ✍️ Readability & Documentation
+### Readability & Documentation
 
 * In-line DocStrings and helper functions are added for all modules
 * Maintains high clarity for future development or review
 
 ---
 
-## ✅ Testing & Quality Assurance
+## Testing & Quality Assurance
 
-### 📋 Test Case Design
+### Test Case Design
 
 1. **TC001**: Spatial Conflict – Same time, same position
 2. **TC002**: Near Miss – Inside safety radius
@@ -99,7 +102,7 @@ graph TD
 6. **TC006**: Boundary Case – Exactly at safety threshold
 7. **TC007**: Temporal Threshold – Time gap just at limit
 
-### 🧪 Configuration Parameters
+### Configuration Parameters
 
 | Parameter          | Value       | Description                                |
 | ------------------ | ----------- | ------------------------------------------ |
@@ -108,14 +111,14 @@ graph TD
 | Test Suite Version | 1.0         | Current version of test scenarios          |
 | Total Test Cases   | 7           | Complete coverage scenarios                |
 
-### 🤖 Test Automation
+### Test Automation
 
 Example of Automated script running
 
 ![Automated_test_example](media/automated_test_example.png)
 
 
-### 🛡️ Robustness & Error Handling
+### Robustness & Error Handling
 
 * Validates types, values, and mission structure
 * Ignores malformed missions gracefully without halting the system
@@ -123,12 +126,12 @@ Example of Automated script running
 * Helper function `validate_waypoint_coordinates()` ensures spatial integrity 
 * [Example snippet](https://github.com/nishchayrobotics/drone-deconfliction-system/blob/main/core/conflict_checker.py)
 
-### ✅ QA Thoughtfulness
+### QA Thoughtfulness
 
 * Layered validation and fallback ensures conflict-checking continues
 * Handles edge cases, corrupted missions, and inconsistent telemetry inputs
 
-#### 🔬 Test Coverage Summary
+#### Test Coverage Summary
 
 | Test Type          | Scenarios Covered   | Purpose                      |
 | ------------------ | ------------------- | ---------------------------- |
@@ -138,15 +141,15 @@ Example of Automated script running
 
 ---
 
-## 🧰 Getting Started
+## Getting Started
 
-### 🔧 Prerequisites
+### Prerequisites
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### ⚙️ Installation
+### Installation
 
 ```bash
 git clone https://github.com/nishchayrobotics/drone-deconfliction-system.git
@@ -156,7 +159,7 @@ python main.py
 
 ---
 
-## 🛠️ Usage
+## Usage
 
 Use `main.py` to:
 
@@ -170,7 +173,7 @@ python -m test.automated_test_runner    #To run the automated script
 
 ---
 
-## 🤝 Contributors
+## Contributors
 
 * **Nishchay Choudha** — BTech ECE, VIT Vellore
 
