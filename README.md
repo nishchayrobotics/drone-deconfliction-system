@@ -1,6 +1,5 @@
 # Drone Deconfliction System 🚁
 
-This project is a 4D UAV Strategic Deconfliction System developed as part of the FlytBase 2025 Robotics Technical Assessment.
 
 ## 🚀 Features
 
