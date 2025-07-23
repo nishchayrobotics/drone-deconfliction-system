@@ -1,146 +1,177 @@
-[![Issues][issues-shield]][issues-url]
+# UAV Strategic Deconfliction in Shared Airspace
 
-<!-- PROJECT LOGO -->
+A 4D UAV Strategic Deconfliction System built using Python and AI tools for the FlytBase Robotics Technical Assessment 2025.
 
-  <h3 align="center">UAV Strategic Deconfliction in Shared
-Airspace</h3>
+---
 
-  <p align="center">
-    A 4D UAV Strategic Deconfliction System built using Python and AI tools For FlytBase Technical Assessment.
-    <br />
-    <a href="https://github.com/csivitu/Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/csivitu/Template">View Demo</a>
-    ·
-    <a href="https://github.com/csivitu/Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/csivitu/Template/issues">Request Feature</a>
-  </p>
-</p>
-
-
-
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
+## 📑 Table of Contents
 
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
-  * [Code quality and Archieticture](#Code-quality-and-Archieticture)
-  * [Testability and Quality Assurance](#Testability-and-Quality-Assurance)
-  * [Effective Use of AI and Resourcefulness](#Effective-Use-of-AI-and-Resourcefulness)
-  * [Documentation, Reflection, and Communication](#Documentation,-Reflection,-and-Communication)
-  * []
+  * [Code Quality & Architecture](#code-quality--architecture)
+  * [Testing & Quality Assurance](#testing--quality-assurance)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contributors](#contributors-)
+* [Contributors](#contributors)
 
+---
 
+## 🚀 About the Project
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+This project implements a strategic deconfliction system that acts as the final authority for verifying whether a drone's waypoint mission is safe to execute in shared airspace.
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+### 🛠️ Built With
 
-Implemented a strategic deconfliction system that serves as the final authority for
-verifying whether a drone's planned waypoint mission is safe to execute in shared airspace.
+* Python
+* Matplotlib
+* Math, Random Libraries
 
+---
 
-### Built With
+## 🧱 Code Quality & Architecture
 
-* [Python]()
-* [Matplotlib]()
-* [Math]()
+### 🧩 Modularity & Structure
 
-### Code quality and Archieticture
-
-#### Modularity and Structure
 ```tree
 C:.
 │   main.py
 │   README.md
 │   requirements.txt
-│   
+│  
 ├───core
-│   │   conflict_checker.py   
-│
+│   │   conflict_checker.py
 ├───data_class
 │   │   mission_data_class.py
-│
 ├───test
 │   │   generated_data.py
-│
 ├───visualizer
 │   │   visualizer.py
 │   │   visualizer_4d.py
 ```
+
 ```mermaid
 graph TD
     A[flytbase_project]
-    
     A --> B(core)
     B --> B1(conflict_checker.py)
-    B --> B2(__pycache__)
-    
     A --> C(data_class)
     C --> C1(mission_data.py)
-    C --> C2(__pycache__)
-    
     A --> D(test)
     D --> D1(sample_data.py)
-    D --> D2(__pycache__)
-    
     A --> E(visualizer)
     E --> E1(visualizer.py)
     E --> E2(visualizer_4d.py)
-    E --> E3(__pycache__)
-    
     A --> F(main.py)
     A --> G(README.md)
     A --> H(requirements.txt)
 ```
 
-<!-- GETTING STARTED -->
-## Getting Started
+### 📏 Coding Standards
 
-To get a local copy up and running follow these simple steps.
+* **Style Guide:** [PEP8](https://peps.python.org/pep-0008/)
+* **DocStrings:** [Best Practices](https://www.datacamp.com/tutorial/docstrings-python)
+* **Type Hints:** [PEP484](https://peps.python.org/pep-0484/)
 
-### Prerequisites
+### 🧠 Architectural Decisions
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
+* Used function-based modular design for isolated subsystems
+* Components can be replaced or reused in scaled cloud deployments
+* `check_conflicts()` function is decoupled from visuals/UI, enabling plug-and-play in APIs or embedded systems
+
+### ✍️ Readability & Documentation
+
+* In-line DocStrings and helper functions are added for all modules
+* Maintains high clarity for future development or review
+
+---
+
+## ✅ Testing & Quality Assurance
+
+### 📋 Test Case Design
+
+1. **TC001**: Spatial Conflict – Same time, same position
+2. **TC002**: Near Miss – Inside safety radius
+3. **TC003**: No Conflict – Different times
+4. **TC004**: No Conflict – Different altitudes
+5. **TC005**: Multi-drone Conflict
+6. **TC006**: Boundary Case – Exactly at safety threshold
+7. **TC007**: Temporal Threshold – Time gap just at limit
+
+### 🧪 Configuration Parameters
+
+| Parameter          | Value       | Description                                |
+| ------------------ | ----------- | ------------------------------------------ |
+| Safety Radius      | 2.0 meters  | Minimum separation distance between drones |
+| Time Threshold     | 5.0 seconds | Minimum time separation for same location  |
+| Test Suite Version | 1.0         | Current version of test scenarios          |
+| Total Test Cases   | 7           | Complete coverage scenarios                |
+
+### 🤖 Test Automation
+
+Example of Automated script running
+
+![Automated_test_example](media/automated_test_example.png)
+
+
+### 🛡️ Robustness & Error Handling
+
+* Validates types, values, and mission structure
+* Ignores malformed missions gracefully without halting the system
+* Logs context-aware debugging messages
+* Helper function `validate_waypoint_coordinates()` ensures spatial integrity 
+* [Example snippet](https://github.com/nishchayrobotics/drone-deconfliction-system/blob/main/core/conflict_checker.py)
+
+### ✅ QA Thoughtfulness
+
+* Layered validation and fallback ensures conflict-checking continues
+* Handles edge cases, corrupted missions, and inconsistent telemetry inputs
+
+#### 🔬 Test Coverage Summary
+
+| Test Type          | Scenarios Covered   | Purpose                      |
+| ------------------ | ------------------- | ---------------------------- |
+| Conflict Detection | TC001, TC002, TC005 | Validate collision detection |
+| Safety Validation  | TC003, TC004, TC007 | Ensure separation compliance |
+| Boundary Testing   | TC006, TC007        | Test precision at thresholds |
+
+---
+
+## 🧰 Getting Started
+
+### 🔧 Prerequisites
+
+```bash
+pip install -r requirements.txt
 ```
 
-### Installation
- 
-1. Clone the repo
-```sh
-git clone https://github.com/csivitu/Template.git
-```
-2. Install NPM packages
-```sh
-npm install
+### ⚙️ Installation
+
+```bash
+git clone https://github.com/nishchayrobotics/drone-deconfliction-system.git
+cd drone-deconfliction-system
+python main.py
 ```
 
+---
 
+## 🛠️ Usage
 
-<!-- USAGE EXAMPLES -->
-## Usage
+Use `main.py` to:
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+* Randomly selected between scenarios: `conflict`, `no_conflict`, `edge_case`
+* Generate visualization (2D or animated 4D)
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+```bash
+python main.py
+python -m test.automated_test_runner    #To run the automated script
+```
 
+---
 
+## 🤝 Contributors
 
-[csivitu-shield]: https://img.shields.io/badge/csivitu-csivitu-blue
-[csivitu-url]: https://csivit.com
-[issues-shield]: https://img.shields.io/github/issues/csivitu/Template.svg?style=flat-square
-[issues-url]: https://github.com/csivitu/Template/issues
+* **Nishchay Choudha** — BTech ECE, VIT Vellore
+
+---

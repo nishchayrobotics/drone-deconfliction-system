@@ -1,0 +1,144 @@
+{
+  "metadata": {
+    "test_run_timestamp": "2025-07-23T14:54:49.644547",
+    "total_tests": 7,
+    "passed_tests": 7,
+    "failed_tests": 0,
+    "total_execution_time": 0.000143
+  },
+  "results": [
+    {
+      "test_id": "TC001",
+      "test_name": "Direct Spatial Conflict - Same Time",
+      "expected": "conflict_detected",
+      "actual": "conflict detected",
+      "passed": true,
+      "execution_time": 5.7e-05,
+      "error_message": null,
+      "conflict_details": [
+        {
+          "with": "ConflictDrone1",
+          "location": [
+            10.0,
+            10.0
+          ],
+          "altitude": 20.0,
+          "time": 10,
+          "distance": 0.8660254037844386
+        }
+      ]
+    },
+    {
+      "test_id": "TC002",
+      "test_name": "Near Miss - Within Safety Radius",
+      "expected": "conflict_detected",
+      "actual": "conflict detected",
+      "passed": true,
+      "execution_time": 3e-05,
+      "error_message": null,
+      "conflict_details": [
+        {
+          "with": "NearMissDrone",
+          "location": [
+            0.0,
+            0.0
+          ],
+          "altitude": 10.0,
+          "time": 0,
+          "distance": 1.5
+        },
+        {
+          "with": "NearMissDrone",
+          "location": [
+            10.0,
+            0.0
+          ],
+          "altitude": 10.0,
+          "time": 20,
+          "distance": 1.5
+        },
+        {
+          "with": "NearMissDrone",
+          "location": [
+            20.0,
+            0.0
+          ],
+          "altitude": 10.0,
+          "time": 40,
+          "distance": 1.5
+        }
+      ]
+    },
+    {
+      "test_id": "TC003",
+      "test_name": "No Conflict - Different Times",
+      "expected": "clear",
+      "actual": "clear",
+      "passed": true,
+      "execution_time": 1.3e-05,
+      "error_message": null,
+      "conflict_details": []
+    },
+    {
+      "test_id": "TC004",
+      "test_name": "No Conflict - Different Altitudes",
+      "expected": "clear",
+      "actual": "clear",
+      "passed": true,
+      "execution_time": 1.2e-05,
+      "error_message": null,
+      "conflict_details": []
+    },
+    {
+      "test_id": "TC005",
+      "test_name": "Multiple Conflicts",
+      "expected": "conflict_detected",
+      "actual": "conflict detected",
+      "passed": true,
+      "execution_time": 1.7e-05,
+      "error_message": null,
+      "conflict_details": [
+        {
+          "with": "ConflictDrone1",
+          "location": [
+            0.0,
+            0.0
+          ],
+          "altitude": 10.0,
+          "time": 0,
+          "distance": 1.5
+        },
+        {
+          "with": "ConflictDrone2",
+          "location": [
+            20.0,
+            20.0
+          ],
+          "altitude": 20.0,
+          "time": 100,
+          "distance": 0.8660254037844386
+        }
+      ]
+    },
+    {
+      "test_id": "TC006",
+      "test_name": "Edge Case - Boundary Safety Radius",
+      "expected": "clear",
+      "actual": "clear",
+      "passed": true,
+      "execution_time": 8e-06,
+      "error_message": null,
+      "conflict_details": []
+    },
+    {
+      "test_id": "TC007",
+      "test_name": "Temporal Edge Case",
+      "expected": "clear",
+      "actual": "clear",
+      "passed": true,
+      "execution_time": 6e-06,
+      "error_message": null,
+      "conflict_details": []
+    }
+  ]
+}

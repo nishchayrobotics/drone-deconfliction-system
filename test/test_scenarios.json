@@ -1,0 +1,420 @@
+{
+  "metadata": {
+    "created": "2025-07-23T14:10:22.437627",
+    "version": "1.0",
+    "description": "Comprehensive test scenarios for drone conflict detection system",
+    "safety_radius": 2.0,
+    "time_threshold": 5.0
+  },
+  "scenarios": [
+    {
+      "id": "TC001",
+      "name": "Direct Spatial Conflict - Same Time",
+      "description": "Two drones at same location at same time",
+      "expected_result": "conflict_detected",
+      "primary_mission": {
+        "name": "PrimaryDrone",
+        "start_time": 0,
+        "end_time": 100,
+        "waypoints": [
+          {
+            "waypoint": {
+              "x": 10.0,
+              "y": 10.0,
+              "z": 20.0
+            },
+            "timestamp": 10
+          },
+          {
+            "waypoint": {
+              "x": 15.0,
+              "y": 15.0,
+              "z": 25.0
+            },
+            "timestamp": 20
+          },
+          {
+            "waypoint": {
+              "x": 20.0,
+              "y": 20.0,
+              "z": 30.0
+            },
+            "timestamp": 30
+          }
+        ]
+      },
+      "other_missions": [
+        {
+          "name": "ConflictDrone1",
+          "start_time": 5,
+          "end_time": 50,
+          "waypoints": [
+            {
+              "waypoint": {
+                "x": 10.5,
+                "y": 10.5,
+                "z": 20.5
+              },
+              "timestamp": 11
+            },
+            {
+              "waypoint": {
+                "x": 25.0,
+                "y": 25.0,
+                "z": 35.0
+              },
+              "timestamp": 40
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TC002",
+      "name": "Near Miss - Within Safety Radius",
+      "description": "Drones pass within safety radius at similar time",
+      "expected_result": "conflict_detected",
+      "primary_mission": {
+        "name": "PrimaryDrone",
+        "start_time": 0,
+        "end_time": 100,
+        "waypoints": [
+          {
+            "waypoint": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 10.0
+            },
+            "timestamp": 0
+          },
+          {
+            "waypoint": {
+              "x": 10.0,
+              "y": 0.0,
+              "z": 10.0
+            },
+            "timestamp": 20
+          },
+          {
+            "waypoint": {
+              "x": 20.0,
+              "y": 0.0,
+              "z": 10.0
+            },
+            "timestamp": 40
+          }
+        ]
+      },
+      "other_missions": [
+        {
+          "name": "NearMissDrone",
+          "start_time": 0,
+          "end_time": 100,
+          "waypoints": [
+            {
+              "waypoint": {
+                "x": 0.0,
+                "y": 1.5,
+                "z": 10.0
+              },
+              "timestamp": 0
+            },
+            {
+              "waypoint": {
+                "x": 10.0,
+                "y": 1.5,
+                "z": 10.0
+              },
+              "timestamp": 22
+            },
+            {
+              "waypoint": {
+                "x": 20.0,
+                "y": 1.5,
+                "z": 10.0
+              },
+              "timestamp": 42
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TC003",
+      "name": "No Conflict - Different Times",
+      "description": "Same path but different time windows",
+      "expected_result": "clear",
+      "primary_mission": {
+        "name": "PrimaryDrone",
+        "start_time": 0,
+        "end_time": 50,
+        "waypoints": [
+          {
+            "waypoint": {
+              "x": 5.0,
+              "y": 5.0,
+              "z": 15.0
+            },
+            "timestamp": 10
+          },
+          {
+            "waypoint": {
+              "x": 15.0,
+              "y": 15.0,
+              "z": 25.0
+            },
+            "timestamp": 30
+          }
+        ]
+      },
+      "other_missions": [
+        {
+          "name": "SafeDrone",
+          "start_time": 60,
+          "end_time": 120,
+          "waypoints": [
+            {
+              "waypoint": {
+                "x": 5.0,
+                "y": 5.0,
+                "z": 15.0
+              },
+              "timestamp": 70
+            },
+            {
+              "waypoint": {
+                "x": 15.0,
+                "y": 15.0,
+                "z": 25.0
+              },
+              "timestamp": 90
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TC004",
+      "name": "No Conflict - Different Altitudes",
+      "description": "Same horizontal path but different altitudes",
+      "expected_result": "clear",
+      "primary_mission": {
+        "name": "PrimaryDrone",
+        "start_time": 0,
+        "end_time": 100,
+        "waypoints": [
+          {
+            "waypoint": {
+              "x": 10.0,
+              "y": 10.0,
+              "z": 20.0
+            },
+            "timestamp": 10
+          },
+          {
+            "waypoint": {
+              "x": 20.0,
+              "y": 20.0,
+              "z": 20.0
+            },
+            "timestamp": 30
+          }
+        ]
+      },
+      "other_missions": [
+        {
+          "name": "HighAltitudeDrone",
+          "start_time": 0,
+          "end_time": 100,
+          "waypoints": [
+            {
+              "waypoint": {
+                "x": 10.0,
+                "y": 10.0,
+                "z": 30.0
+              },
+              "timestamp": 12
+            },
+            {
+              "waypoint": {
+                "x": 20.0,
+                "y": 20.0,
+                "z": 30.0
+              },
+              "timestamp": 32
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TC005",
+      "name": "Multiple Conflicts",
+      "description": "Primary drone conflicts with multiple drones",
+      "expected_result": "conflict_detected",
+      "primary_mission": {
+        "name": "PrimaryDrone",
+        "start_time": 0,
+        "end_time": 200,
+        "waypoints": [
+          {
+            "waypoint": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 10.0
+            },
+            "timestamp": 0
+          },
+          {
+            "waypoint": {
+              "x": 10.0,
+              "y": 10.0,
+              "z": 15.0
+            },
+            "timestamp": 50
+          },
+          {
+            "waypoint": {
+              "x": 20.0,
+              "y": 20.0,
+              "z": 20.0
+            },
+            "timestamp": 100
+          },
+          {
+            "waypoint": {
+              "x": 30.0,
+              "y": 30.0,
+              "z": 25.0
+            },
+            "timestamp": 150
+          }
+        ]
+      },
+      "other_missions": [
+        {
+          "name": "ConflictDrone1",
+          "start_time": 0,
+          "end_time": 100,
+          "waypoints": [
+            {
+              "waypoint": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 10.5
+              },
+              "timestamp": 2
+            },
+            {
+              "waypoint": {
+                "x": 25.0,
+                "y": 25.0,
+                "z": 30.0
+              },
+              "timestamp": 80
+            }
+          ]
+        },
+        {
+          "name": "ConflictDrone2",
+          "start_time": 90,
+          "end_time": 180,
+          "waypoints": [
+            {
+              "waypoint": {
+                "x": 19.5,
+                "y": 19.5,
+                "z": 19.5
+              },
+              "timestamp": 98
+            },
+            {
+              "waypoint": {
+                "x": 40.0,
+                "y": 40.0,
+                "z": 35.0
+              },
+              "timestamp": 160
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TC006",
+      "name": "Edge Case - Boundary Safety Radius",
+      "description": "Drones exactly at safety radius boundary",
+      "expected_result": "clear",
+      "primary_mission": {
+        "name": "PrimaryDrone",
+        "start_time": 0,
+        "end_time": 100,
+        "waypoints": [
+          {
+            "waypoint": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 10.0
+            },
+            "timestamp": 10
+          }
+        ]
+      },
+      "other_missions": [
+        {
+          "name": "BoundaryDrone",
+          "start_time": 0,
+          "end_time": 100,
+          "waypoints": [
+            {
+              "waypoint": {
+                "x": 2.1,
+                "y": 0.0,
+                "z": 10.0
+              },
+              "timestamp": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TC007",
+      "name": "Temporal Edge Case",
+      "description": "Drones at same location but time difference at threshold",
+      "expected_result": "clear",
+      "primary_mission": {
+        "name": "PrimaryDrone",
+        "start_time": 0,
+        "end_time": 100,
+        "waypoints": [
+          {
+            "waypoint": {
+              "x": 15.0,
+              "y": 15.0,
+              "z": 20.0
+            },
+            "timestamp": 20
+          }
+        ]
+      },
+      "other_missions": [
+        {
+          "name": "TimeShiftedDrone",
+          "start_time": 0,
+          "end_time": 100,
+          "waypoints": [
+            {
+              "waypoint": {
+                "x": 15.0,
+                "y": 15.0,
+                "z": 20.0
+              },
+              "timestamp": 26
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
